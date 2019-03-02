@@ -5,6 +5,10 @@
     margin-right: auto;
 }
 
+.middle{
+  margin-left:40px;
+}
+
 .example-icon {
     margin: 0 14px;
   }

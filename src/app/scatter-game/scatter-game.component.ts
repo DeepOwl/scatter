@@ -16,6 +16,8 @@ export class ScatterGameComponent implements OnInit {
   public showTimer:boolean = false;
   public toolbarColor = "primary";
   public edit:boolean;
+  public startLetter:string;
+  public showLetter:boolean = false;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -25,11 +27,13 @@ export class ScatterGameComponent implements OnInit {
   }
 
   initializeState(){
+    this.showLetter = false;
     const id = this.route.snapshot.paramMap.get('id');
     var seed = xmur3(id);
     this.rand = mulberry32(seed());
     this.getList(id);
     this.next = this.getNextCard()
+    this.startLetter = this.getStartLetter()
   }
   getList( id: string){
     this.categories = this.getRandom(Categories, 10);
@@ -54,6 +58,11 @@ export class ScatterGameComponent implements OnInit {
     for (var i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(this.rand() * possible.length));  
     return text;
+  }
+
+  getStartLetter(){
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return possible.charAt(Math.floor(this.rand() * possible.length));  
   }
 
   handleTimer(timeLeft:number){

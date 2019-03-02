@@ -2,6 +2,16 @@
   
     <mat-toolbar-row>
       <span>Scatter!</span>
+      <span class="middle">
+        <ng-container *ngIf="!showLetter">
+            <button mat-button (click)="showLetter=true">
+              REVEAL LETTER
+            </button>
+        </ng-container>
+        <ng-container *ngIf="showLetter">
+            Starts with {{startLetter}}
+        </ng-container>
+      </span>
       <span class="example-spacer"></span>
       <app-game-timer (timerAlert)="handleTimer($event)"></app-game-timer>
       <button (click)="edit=!edit"class="example-icon" mat-icon-button>
@@ -11,11 +21,16 @@
   </mat-toolbar>
 
 <mat-card class="scatter-card">
-  <mat-card-title>
-      <mat-card-header>
+  <mat-card-header>
+      <mat-card-title>
         List {{id}}
-      </mat-card-header>
-    </mat-card-title>
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="!showLetter" (click)="showLetter=true">
+          tap to reveal starting letter
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="showLetter">Starts with {{startLetter}}
+      </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
       <ng-container *ngIf="edit">
         <mat-form-field *ngFor="let category of categories; let i = index;" class="example-form-field">
