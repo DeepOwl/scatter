@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import Speech from 'speak-tts' // es6
-import { startTimeRange } from '@angular/core/src/profile/wtf_impl';
 
 @Component({
   selector: 'app-game-timer',
@@ -13,6 +12,7 @@ export class GameTimerComponent implements OnInit {
   public timerMinutes:number = 3;
   public timeLeft:number;
   private interval;
+  @Input() letter:string;
   private mute: boolean = false;
   public notify = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
   @Output() timerAlert = new EventEmitter<number>();
@@ -83,7 +83,7 @@ export class GameTimerComponent implements OnInit {
   playPressed(){
     clearInterval(this.interval);
     if(this.shouldSpeak()){
-      this.speak("ready? set? go!").then(data=>{
+      this.speak(`words that start with ${this.letter}. ready? set? go!`).then(data=>{
         this.startTimer();
       });
     } else {

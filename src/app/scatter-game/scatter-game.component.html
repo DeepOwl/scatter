@@ -8,7 +8,7 @@
         </ng-container>
       </span>
       <span class="example-spacer"></span>
-      <app-game-timer (timerAlert)="handleTimer($event)"></app-game-timer>
+      <app-game-timer [letter]="startLetter" (timerAlert)="handleTimer($event)"></app-game-timer>
       <button (click)="edit=!edit"class="example-icon" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
