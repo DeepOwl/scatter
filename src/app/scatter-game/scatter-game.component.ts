@@ -76,7 +76,7 @@ export class ScatterGameComponent implements OnInit {
   getNextCard(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 4; i++)
       text += possible.charAt(Math.floor(this.rand() * possible.length));  
     return text;
   }
