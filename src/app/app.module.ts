@@ -8,13 +8,15 @@ import { MaterialModule } from './material/material.module';
 import { ScatterComponent } from './scatter/scatter.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ScatterGameComponent } from './scatter-game/scatter-game.component';
+import { GameTimerComponent } from './game-timer/game-timer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScatterComponent,
     DashboardComponent,
-    ScatterGameComponent
+    ScatterGameComponent,
+    GameTimerComponent
   ],
   imports: [
     BrowserModule,

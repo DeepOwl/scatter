@@ -1,8 +1,24 @@
-<mat-card class="scatter-card">
+<mat-toolbar class="toolbar" [color]="toolbarColor">
+  
+    <mat-toolbar-row>
+      <span>Scatter!</span>
+      <span class="example-spacer"></span>
+      <app-game-timer (timerAlert)="handleTimer($event)"></app-game-timer>
+      <button class="example-icon" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
+<mat-card class="scatter-card">
+  <mat-card-title>
+      <mat-card-header>
+        List {{id}}
+      </mat-card-header>
+    </mat-card-title>
   <mat-list >
-    <mat-list-item *ngFor="let category of categories">
-        <h4 mat-line>{{category}}</h4>
+    <mat-list-item *ngFor="let category of categories; let i = index;">
+        <h4 mat-line>{{i+1}}. {{category}}</h4>
     </mat-list-item>
   </mat-list>
   <mat-card-actions>

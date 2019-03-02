@@ -13,6 +13,9 @@ export class ScatterGameComponent implements OnInit {
   public next:string;
   constructor(private route:ActivatedRoute) { }
   public id:string;
+  public showTimer:boolean = false;
+  public toolbarColor = "primary";
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -50,6 +53,13 @@ export class ScatterGameComponent implements OnInit {
     for (var i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(this.rand() * possible.length));  
     return text;
+  }
+
+  handleTimer(timeLeft:number){
+    this.toolbarColor = "warn";
+    setTimeout(res=>{
+      this.toolbarColor = "accent";
+    }, 100)
   }
     
 

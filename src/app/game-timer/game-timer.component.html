@@ -1,0 +1,19 @@
+
+<ng-container *ngIf="showTimer">
+    <button *ngIf="!timerActive && timeLeft<timerMinutes*60" (click)="resetTimer()" class="example-icon" mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+    </button>
+    <button *ngIf="!timerActive" (click)="startTimer()" class="example-icon" mat-icon-button>
+        <mat-icon>play_arrow</mat-icon>
+    </button>
+
+    <button *ngIf="timerActive"  (click)="pauseTimer()" class="example-icon" mat-icon-button>
+        <mat-icon>pause</mat-icon>
+    </button>
+    <button (click)="togglePlay()" mat-button> 
+    {{ timeLeft*1000 | date:'m:ss' }}
+  </button>
+</ng-container>
+<button (click)="toggleTimer()" class="example-icon" mat-icon-button >
+  <mat-icon [matBadgeHidden]="!showTimer" [matBadge]="timerMinutes" matBadgeColor="accent">timer</mat-icon>
+</button>
