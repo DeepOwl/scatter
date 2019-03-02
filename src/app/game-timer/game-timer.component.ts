@@ -19,6 +19,7 @@ export class GameTimerComponent implements OnInit {
   ngOnInit() {
     this.resetTimer();
   }
+
   toggleTimer(){
     if(!this.showTimer){
       this.showTimer=true;

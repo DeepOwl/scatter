@@ -15,6 +15,7 @@ export class ScatterGameComponent implements OnInit {
   public id:string;
   public showTimer:boolean = false;
   public toolbarColor = "primary";
+  public edit:boolean;
 
   ngOnInit() {
     this.route.params.subscribe(params => {

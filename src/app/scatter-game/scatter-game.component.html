@@ -4,7 +4,7 @@
       <span>Scatter!</span>
       <span class="example-spacer"></span>
       <app-game-timer (timerAlert)="handleTimer($event)"></app-game-timer>
-      <button class="example-icon" mat-icon-button>
+      <button (click)="edit=!edit"class="example-icon" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
     </mat-toolbar-row>
@@ -16,13 +16,24 @@
         List {{id}}
       </mat-card-header>
     </mat-card-title>
-  <mat-list >
+    <mat-card-content>
+      <ng-container *ngIf="edit">
+        <mat-form-field *ngFor="let category of categories; let i = index;" class="example-form-field">
+            <input #input matInput type="text" placeholder="{{i+1}}. {{category}}">
+            <button mat-button *ngIf="input.value" matSuffix mat-icon-button aria-label="Clear" (click)="input.value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </ng-container>
+  <mat-list *ngIf="!edit" >
     <mat-list-item *ngFor="let category of categories; let i = index;">
         <h4 mat-line>{{i+1}}. {{category}}</h4>
     </mat-list-item>
   </mat-list>
-  <mat-card-actions>
-      <button routerLink='/scatter/{{next}}' mat-button color="primary">NEXT</button>
-      <button (click)="share()" mat-button color="primary">SHARE</button>
-  </mat-card-actions>
+
+</mat-card-content>
+<mat-card-actions>
+    <button routerLink='/scatter/{{next}}' mat-button color="primary">NEXT</button>
+    <button (click)="share()" mat-button color="primary">SHARE</button>
+</mat-card-actions>
 </mat-card>>
