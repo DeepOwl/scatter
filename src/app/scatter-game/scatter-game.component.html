@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar" [color]="toolbarColor">
   
     <mat-toolbar-row>
-      <span>Scatter! Score:{{score}}</span>
+      <span>Scatter! {{score}} pts.</span>
       <span class="middle">
         <ng-container *ngIf="!showLetter">
             <button mat-button (click)="showLetter=true">

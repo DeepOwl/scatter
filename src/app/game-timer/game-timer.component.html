@@ -1,9 +1,12 @@
 
 <ng-container *ngIf="showTimer">
+    <button (click)="mute=!mute" class="example-icon" mat-icon-button>
+        <mat-icon>{{mute?'volume_mute':'volume_up'}}</mat-icon>
+    </button>
     <button *ngIf="!timerActive && timeLeft<timerMinutes*60" (click)="resetTimer()" class="example-icon" mat-icon-button>
         <mat-icon>refresh</mat-icon>
     </button>
-    <button *ngIf="!timerActive" (click)="startTimer()" class="example-icon" mat-icon-button>
+    <button *ngIf="!timerActive" (click)="playPressed()" class="example-icon" mat-icon-button>
         <mat-icon>play_arrow</mat-icon>
     </button>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categories } from './categories';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-scatter-game',
   templateUrl: './scatter-game.component.html',
@@ -21,9 +22,11 @@ export class ScatterGameComponent implements OnInit {
   public listLength:number = 10;
   public scoreArray:number[];
 
+
   constructor(private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
+    
     this.scoreArray = new Array<number>(this.listLength);
     for(var i=0;i++;i<this.listLength){
       this.scoreArray.push(0);
