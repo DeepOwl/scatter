@@ -21,6 +21,7 @@ export class ScatterGameComponent implements OnInit {
   public score:number = 0;
   public listLength:number = 10;
   public scoreArray:number[];
+  public subScore:number=0;
 
 
   constructor(private route:ActivatedRoute, private router:Router) { }
@@ -53,10 +54,12 @@ export class ScatterGameComponent implements OnInit {
 
   cyclePoints(index:number){
     this.scoreArray[index] = (this.scoreArray[index]+1)%3
+    this.subScore =  this.scoreArray.reduce((total,num)=>total+num)
   }
 
   nextCard(){
-    this.score+= this.scoreArray.reduce((total,num)=>total+num)
+    this.score+= this.subScore;
+    this.subScore = 0;
     this.router.navigate([`scatter/${this.next}`]);
   }
 

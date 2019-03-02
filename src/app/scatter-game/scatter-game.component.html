@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar" [color]="toolbarColor">
   
     <mat-toolbar-row>
-      <span>{{score}} pts.</span>
+      <span>{{score}} pts</span>
       <span class="middle">
         <ng-container *ngIf="showLetter">
             <strong>{{startLetter}}</strong>
@@ -26,6 +26,7 @@
       </mat-card-subtitle>
       <mat-card-subtitle *ngIf="showLetter">Starts with {{startLetter}}
       </mat-card-subtitle>
+      <p style="color:lightgray; position:absolute;right:40px">+{{subScore}} pts</p>
     </mat-card-header>
     <mat-divider style="margin-top:2px; margin-bottom:2px" [inset]='true'></mat-divider>
     <mat-card-content>
@@ -51,4 +52,5 @@
     <button (click)="nextCard()" mat-button color="primary">NEXT</button>
     <button (click)="share()" mat-button color="primary">SHARE</button>
 </mat-card-actions>
+
 </mat-card>
