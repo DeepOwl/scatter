@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar" [color]="toolbarColor">
   
     <mat-toolbar-row>
-      <span>Scatter!</span>
+      <span>Scatter! Score:{{score}}</span>
       <span class="middle">
         <ng-container *ngIf="!showLetter">
             <button mat-button (click)="showLetter=true">
@@ -21,11 +21,11 @@
   </mat-toolbar>
 
 <mat-card class="scatter-card">
-  <mat-card-header>
+  <mat-card-header (click)="showLetter=true">
       <mat-card-title>
         List {{id}}
       </mat-card-title>
-      <mat-card-subtitle *ngIf="!showLetter" (click)="showLetter=true">
+      <mat-card-subtitle *ngIf="!showLetter" >
           tap to reveal starting letter
       </mat-card-subtitle>
       <mat-card-subtitle *ngIf="showLetter">Starts with {{startLetter}}
@@ -33,22 +33,25 @@
     </mat-card-header>
     <mat-card-content>
       <ng-container *ngIf="edit">
-        <mat-form-field *ngFor="let category of categories; let i = index;" class="example-form-field">
+        <div *ngFor="let category of categories; let i = index;" >
+        <mat-form-field class="example-form-field">
             <input #input matInput type="text" placeholder="{{i+1}}. {{category}}">
             <button mat-button *ngIf="input.value" matSuffix mat-icon-button aria-label="Clear" (click)="input.value=''">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
+          <button style="color:lightgray" mat-button (click)="cyclePoints(i)">+{{scoreArray[i]}} pts</button>
+        </div>
         </ng-container>
   <mat-list *ngIf="!edit" >
     <mat-list-item *ngFor="let category of categories; let i = index;">
+        <button style="color:lightgray" mat-button (click)="cyclePoints(i)">+{{scoreArray[i]}} pts</button>
         <h4 mat-line>{{i+1}}. {{category}}</h4>
     </mat-list-item>
   </mat-list>
-
 </mat-card-content>
 <mat-card-actions>
-    <button routerLink='/scatter/{{next}}' mat-button color="primary">NEXT</button>
+    <button (click)="nextCard()" mat-button color="primary">NEXT</button>
     <button (click)="share()" mat-button color="primary">SHARE</button>
 </mat-card-actions>
 </mat-card>>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Categories } from './categories';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-scatter-game',
   templateUrl: './scatter-game.component.html',
@@ -11,19 +11,27 @@ export class ScatterGameComponent implements OnInit {
   public categories:string[];
   public rand;
   public next:string;
-  constructor(private route:ActivatedRoute) { }
   public id:string;
   public showTimer:boolean = false;
   public toolbarColor = "primary";
   public edit:boolean;
   public startLetter:string;
   public showLetter:boolean = false;
+  public score:number = 0;
+  public listLength:number = 10;
+  public scoreArray:number[];
+
+  constructor(private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
+    this.scoreArray = new Array<number>(this.listLength);
+    for(var i=0;i++;i<this.listLength){
+      this.scoreArray.push(0);
+    }
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.initializeState(); // reset and set based on new parameter this time
-    });  
+    });
   }
 
   initializeState(){
@@ -34,9 +42,19 @@ export class ScatterGameComponent implements OnInit {
     this.getList(id);
     this.next = this.getNextCard()
     this.startLetter = this.getStartLetter()
+    setAll(this.scoreArray, 0);
   }
   getList( id: string){
-    this.categories = this.getRandom(Categories, 10);
+    this.categories = this.getRandom(Categories, this.listLength);
+  }
+
+  cyclePoints(index:number){
+    this.scoreArray[index] = (this.scoreArray[index]+1)%3
+  }
+
+  nextCard(){
+    this.score+= this.scoreArray.reduce((total,num)=>total+num)
+    this.router.navigate([`scatter/${this.next}`]);
   }
 
   share(){
@@ -120,5 +138,12 @@ function sfc32(a, b, c, d) {
     t = t + d | 0;
     c = c + t | 0;
     return (t >>> 0) / 4294967296;
+  }
+}
+
+function setAll(a, v) {
+  var i, n = a.length;
+  for (i = 0; i < n; ++i) {
+      a[i] = v;
   }
 }
