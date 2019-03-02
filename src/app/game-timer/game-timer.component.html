@@ -1,7 +1,7 @@
 
 <ng-container *ngIf="showTimer">
     <button (click)="mute=!mute" class="example-icon" mat-icon-button>
-        <mat-icon>{{mute?'volume_mute':'volume_up'}}</mat-icon>
+        <mat-icon>{{mute?'volume_off':'volume_up'}}</mat-icon>
     </button>
     <button *ngIf="!timerActive && timeLeft<timerMinutes*60" (click)="resetTimer()" class="example-icon" mat-icon-button>
         <mat-icon>refresh</mat-icon>

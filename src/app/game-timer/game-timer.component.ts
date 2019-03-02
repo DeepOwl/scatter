@@ -93,20 +93,20 @@ export class GameTimerComponent implements OnInit {
 
   startTimer() {
     this.timerActive = true;
-      this.interval = setInterval(() => {
-        if(this.timeLeft > 0) {
-          this.timeLeft--;
-          if(this.notify.includes(this.timeLeft)){
-            if(this.shouldSpeak()){
-              this.speak(''+this.timeLeft);
-            }
-            this.timerAlert.next(this.timeLeft);
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+        if(this.notify.includes(this.timeLeft)){
+          if(this.shouldSpeak()){
+            this.speak(''+this.timeLeft);
           }
-        } else {
-          this.speak('time\'s up');
-          this.resetTimer();
+          this.timerAlert.next(this.timeLeft);
         }
-      },1000)    
+      } else {
+        this.speak('time\'s up');
+        this.resetTimer();
+      }
+    },1000)    
   }
 
   pauseTimer() {
@@ -128,6 +128,25 @@ export class GameTimerComponent implements OnInit {
     {
       text: utterance,
       queue: false,
+      listeners: {
+        onstart: () => {
+          //console.log("Start utterance");
+        },
+        onend: () => {
+          //console.log("End utterance");
+        },
+        onresume: () => {
+          //console.log("Resume utterance");
+        },
+        onboundary: event => {
+          // console.log(
+          //   event.name +
+          //     " boundary reached after " +
+          //     event.elapsedTime +
+          //     " milliseconds."
+          // );
+        }
+      }
     });
 
   }

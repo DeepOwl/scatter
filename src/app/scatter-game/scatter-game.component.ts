@@ -87,9 +87,9 @@ export class ScatterGameComponent implements OnInit {
   }
 
   handleTimer(timeLeft:number){
-    this.toolbarColor = "warn";
+    this.toolbarColor = "accent";
     setTimeout(res=>{
-      this.toolbarColor = "accent";
+      this.toolbarColor = "primary";
     }, 100)
   }
     

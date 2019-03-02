@@ -1,15 +1,10 @@
 <mat-toolbar class="toolbar" [color]="toolbarColor">
   
     <mat-toolbar-row>
-      <span>Scatter! {{score}} pts.</span>
+      <span>{{score}} pts.</span>
       <span class="middle">
-        <ng-container *ngIf="!showLetter">
-            <button mat-button (click)="showLetter=true">
-              REVEAL LETTER
-            </button>
-        </ng-container>
         <ng-container *ngIf="showLetter">
-            Starts with {{startLetter}}
+            <strong>{{startLetter}}</strong>
         </ng-container>
       </span>
       <span class="example-spacer"></span>
@@ -22,6 +17,7 @@
 
 <mat-card class="scatter-card">
   <mat-card-header (click)="showLetter=true">
+      <div mat-card-avatar class="numberCircle">{{showLetter?startLetter:'?'}}</div>
       <mat-card-title>
         List {{id}}
       </mat-card-title>
@@ -31,6 +27,7 @@
       <mat-card-subtitle *ngIf="showLetter">Starts with {{startLetter}}
       </mat-card-subtitle>
     </mat-card-header>
+    <mat-divider style="margin-top:2px; margin-bottom:2px" [inset]='true'></mat-divider>
     <mat-card-content>
       <ng-container *ngIf="edit">
         <div *ngFor="let category of categories; let i = index;" >

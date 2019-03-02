@@ -1,5 +1,5 @@
 .scatter-card{
-    max-width: 300px;
+    max-width: 350px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -25,5 +25,24 @@
 }
 
 .example-form-field {
-  width: 210px;
+  width: 260px;
+}
+
+.numberCircle {
+  border-radius: 50%;
+  /* remove if you don't care about IE8 */
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+}
+
+::ng-deep .mat-list .mat-list-item .mat-line{
+  word-wrap: break-word;
+ white-space: pre-wrap;
 }
