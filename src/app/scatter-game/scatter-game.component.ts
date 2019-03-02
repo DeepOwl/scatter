@@ -32,6 +32,7 @@ export class ScatterGameComponent implements OnInit {
   }
 
   share(){
+    /*
     if (navigator.share) {
       navigator.share({
           title: 'Web Fundamentals',
@@ -40,7 +41,7 @@ export class ScatterGameComponent implements OnInit {
       })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));
-    }
+    }*/
   }
 
   getNextCard(){
