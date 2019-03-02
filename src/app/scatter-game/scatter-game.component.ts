@@ -110,6 +110,42 @@ export class ScatterGameComponent implements OnInit {
     }
     return result;
   }
+  keytab(event){
+    //OK THIS IS BAD
+    //first the current element, and pick the next one
+    let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.parentElement
+    let inputs = element.querySelectorAll('input');
+    var index = 0;
+    var foundIndex = 0;
+    var found = false;
+    for(let inputElement of inputs) {
+      if(inputElement === event.srcElement){
+        found = true;
+        foundIndex = index;
+      } else {
+        if(found && inputElement.value.length <2){
+          inputElement.focus();
+          return; //stop searching
+        }
+      }
+      index++;
+    }
+    //if we've reached the end of the list go back around
+    for(let inputElement of inputs) {
+      if(inputElement === event.srcElement){
+        //this means everything's filled, so just find the next
+        inputs.item((foundIndex+1)%this.listLength).focus();
+        return;
+      }else {
+        if(inputElement.value.length <2){
+          inputElement.focus();
+          return; //stop searching
+        }
+      }
+    }
+    
+    
+  }
 
 }
 
