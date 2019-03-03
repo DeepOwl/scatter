@@ -11,6 +11,7 @@ import { ScatterComponent } from './scatter/scatter.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ScatterGameComponent } from './scatter-game/scatter-game.component';
 import { GameTimerComponent } from './game-timer/game-timer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GameTimerComponent } from './game-timer/game-timer.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

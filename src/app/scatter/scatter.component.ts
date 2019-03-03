@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class ScatterComponent implements OnInit {
   startingId:string;
+  targetId:string;
   constructor(private router:Router) { }
 
   ngOnInit() {

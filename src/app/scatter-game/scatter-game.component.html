@@ -51,8 +51,8 @@
   </mat-list>
 </mat-card-content>
 <mat-card-actions>
-    <button (click)="nextCard()" mat-button color="primary">NEXT</button>
-    <button (click)="share()" mat-button color="primary">SHARE</button>
+  <button (click)="nextCard()" mat-button color="primary">NEXT</button>
+  <button (click)="shareApi()" mat-button color="primary">{{canShare()?'SHARE':'COPY Link'}}</button>
 </mat-card-actions>
 
 </mat-card>

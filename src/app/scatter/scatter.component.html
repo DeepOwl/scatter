@@ -5,8 +5,11 @@
     </mat-card-header>
   </mat-card-title>
   <mat-card-content>
-    <mat-card-actions>
-        <button (click)="startGame()" mat-button color="primary">START</button>
-    </mat-card-actions>
+      <mat-form-field style="width:100%" class="example-form-field">
+          <input  matInput type="text" [(ngModel)]='targetId' placeholder="Enter the 4 letter card name, or just press start" >
+        </mat-form-field>
   </mat-card-content>
+  <mat-card-actions>
+      <button (click)="startGame()" mat-button color="primary">START</button>
+  </mat-card-actions>
 </mat-card>
