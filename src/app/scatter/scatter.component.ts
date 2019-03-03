@@ -7,15 +7,26 @@ import { Router } from '@angular/router';
 })
 export class ScatterComponent implements OnInit {
   startingId:string;
-  targetId:string;
+  targetId:string = '';
   constructor(private router:Router) { }
 
   ngOnInit() {
     this.startingId = this.getNextCard();
   }
+  validId():boolean{
+    var potential = this.targetId.split(' ').join('')
+    return potential.length>2;
+  }
 
-  startGame(){
+  startGameRandom(){
     this.router.navigate([`scatter/${this.startingId}`], )
+  }
+  startGame(){
+    var potential = this.targetId=this.targetId.split(' ').join('')
+    if(this.validId){
+      this.router.navigate([`scatter/${potential.toUpperCase()}`],)
+    }
+    
   }
 
   getNextCard(){

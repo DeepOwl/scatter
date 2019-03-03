@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="scatter-card">
   <mat-card-title>
     <mat-card-header>
       Get ready to play Scatter!
@@ -9,7 +9,8 @@
           <input  matInput type="text" [(ngModel)]='targetId' placeholder="Enter the 4 letter card name, or just press start" >
         </mat-form-field>
   </mat-card-content>
-  <mat-card-actions>
-      <button (click)="startGame()" mat-button color="primary">START</button>
+  <mat-card-actions align="right">
+      <button (click)="startGameRandom()" mat-raised-button color="primary">RANDOM CARD</button>
+      <button [disabled]="!validId()"  (click)="startGame()" mat-raised-button color="primary">START</button>
   </mat-card-actions>
 </mat-card>

@@ -15,7 +15,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-<mat-card [@flip]="flip" class="scatter-card" [class.back]="flip=='flipped'">
+<mat-card [@flip]="flip" class="scatter-card">
   <mat-card-header (click)="showLetter=true">
       <div mat-card-avatar class="numberCircle">{{showLetter?startLetter:'?'}}</div>
       <mat-card-title>
@@ -66,8 +66,8 @@
   </mat-list>
 </mat-card-content>
 <mat-card-actions align="end">
-  <button (click)="shareApi()" mat-button color="primary">{{canShare()?'SHARE':'COPY LINK'}}</button>
-  <button (click)="nextCard()" mat-button color="primary">NEXT</button>
+  <button (click)="shareApi()" mat-button color="primary">{{canShare()?'SHARE LINK':'COPY LINK'}}</button>
+  <button (click)="nextCard()" mat-button color="primary">NEXT CARD</button>
 </mat-card-actions>
 
 </mat-card>
