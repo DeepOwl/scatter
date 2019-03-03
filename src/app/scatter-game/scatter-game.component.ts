@@ -83,7 +83,7 @@ export class ScatterGameComponent implements OnInit {
   }
 
   getStartLetter() {
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var possible = "ABCDEFGHIJKLMNOPRSTW";
     return possible.charAt(Math.floor(this.rand() * possible.length));
   }
 
