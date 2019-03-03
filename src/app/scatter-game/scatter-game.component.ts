@@ -3,11 +3,27 @@ import { Categories } from './categories';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { MatSnackBar } from '@angular/material'
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-scatter-game',
   templateUrl: './scatter-game.component.html',
-  styleUrls: ['./scatter-game.component.css']
+  styleUrls: ['./scatter-game.component.css'],
+  animations: [
+    trigger('flip', [
+      state('flipped', style({ transform: 'rotateY(90deg)' })),
+      state('unflipped', style({ transform: 'rotateY(0deg)' })),
+      transition('flipped => unflipped', animate('200ms ease-in-out')),
+      transition('unflipped => flipped', animate('200ms ease-in-out'))
+    ])  
+  ]
 })
 export class ScatterGameComponent implements OnInit {
   public allCategories: string[] = Categories;
@@ -26,6 +42,7 @@ export class ScatterGameComponent implements OnInit {
   public answers: string[];
   public subScore: number = 0;
   private savedAnswers = {};
+  flip = 'unflipped';
 
   constructor(private route: ActivatedRoute, private router: Router, private ngNavigatorShareService: NgNavigatorShareService, private snackBar: MatSnackBar) { }
 
@@ -68,10 +85,17 @@ export class ScatterGameComponent implements OnInit {
   }
 
   nextCard() {
+    this.flip = (this.flip === 'unflipped') ? 'flipped' : 'unflipped';
+    if (this.flip == 'flipped') {
+      setTimeout(() => {
+        this.flip = 'unflipped';
+        this.router.navigate([`scatter/${this.next}`]);
+      }, 200);
+    }
     this.score += this.subScore;
     this.subScore = 0;
     this.savedAnswers[this.id]=Object.assign([], this.answers);
-    this.router.navigate([`scatter/${this.next}`]);
+    //this.router.navigate([`scatter/${this.next}`]);
   }
 
   getNextCard() {

@@ -9,13 +9,13 @@
       </span>
       <span class="example-spacer"></span>
       <app-game-timer [letter]="startLetter" (timerAlert)="handleTimer($event)"></app-game-timer>
-      <button (click)="edit=!edit"class="example-icon" mat-icon-button>
+      <!--button (click)="edit=!edit"class="example-icon" mat-icon-button>
           <mat-icon>edit</mat-icon>
-        </button>
+        </button-->
     </mat-toolbar-row>
   </mat-toolbar>
 
-<mat-card class="scatter-card">
+<mat-card [@flip]="flip" class="scatter-card" [class.back]="flip=='flipped'">
   <mat-card-header (click)="showLetter=true">
       <div mat-card-avatar class="numberCircle">{{showLetter?startLetter:'?'}}</div>
       <mat-card-title>
