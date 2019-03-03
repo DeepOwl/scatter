@@ -17,22 +17,25 @@ export class ScatterGameComponent implements OnInit {
   public id: string;
   public showTimer: boolean = false;
   public toolbarColor = "primary";
-  public edit: boolean;
+  public edit: boolean = true;
   public startLetter: string;
   public showLetter: boolean = false;
   public score: number = 0;
   public listLength: number = 10;
   public scoreArray: number[];
+  public answers: string[];
   public subScore: number = 0;
-
+  private savedAnswers = {};
 
   constructor(private route: ActivatedRoute, private router: Router, private ngNavigatorShareService: NgNavigatorShareService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
     this.scoreArray = new Array<number>(this.listLength);
+    this.answers = new Array<string>(this.listLength);
     for (var i = 0; i++; i < this.listLength) {
       this.scoreArray.push(0);
+      this.answers.push('');
     }
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -49,6 +52,11 @@ export class ScatterGameComponent implements OnInit {
     this.next = this.getNextCard()
     this.startLetter = this.getStartLetter()
     setAll(this.scoreArray, 0);
+    try{
+      this.answers = Object.assign([], this.savedAnswers[id])
+    } catch(e){
+      setAll(this.answers, '');
+    }
   }
   getList(id: string) {
     this.categories = this.getRandom(Categories, this.listLength);
@@ -62,6 +70,7 @@ export class ScatterGameComponent implements OnInit {
   nextCard() {
     this.score += this.subScore;
     this.subScore = 0;
+    this.savedAnswers[this.id]=Object.assign([], this.answers);
     this.router.navigate([`scatter/${this.next}`]);
   }
 
@@ -140,7 +149,7 @@ export class ScatterGameComponent implements OnInit {
   keytab(event) {
     //OK THIS IS BAD
     //first the current element, and pick the next one
-    let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.parentElement
+    let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
     let inputs = element.querySelectorAll('input');
     var index = 0;
     var foundIndex = 0;
