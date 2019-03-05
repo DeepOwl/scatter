@@ -4,14 +4,14 @@
       <span>{{score}} pts</span>
       <span class="middle">
         <ng-container *ngIf="showLetter">
-            <strong>{{startLetter}}</strong>
+            <strong>"{{startLetter}}"</strong>
         </ng-container>
       </span>
       <span class="example-spacer"></span>
       <app-game-timer [letter]="startLetter" (timerAlert)="handleTimer($event)"></app-game-timer>
-      <!--button (click)="edit=!edit"class="example-icon" mat-icon-button>
-          <mat-icon>edit</mat-icon>
-        </button-->
+      <button (click)="shareApi()"class="example-icon" mat-icon-button>
+          <mat-icon>share</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -46,9 +46,6 @@
             (click)="cyclePoints(i)">
                 <mat-icon>{{scoreArray[i]==0?'exposure_zero':scoreArray[i]==1?'exposure_plus_1':'exposure_plus_2'}}</mat-icon>
             </button>
-            <!--
-          <button [color]="scoreArray[i]?'primary':'default'" class="right" mat-mini-fab (click)="cyclePoints(i)">+{{scoreArray[i]}}</button>
-        -->
         </div>
         </ng-container>
         </ng-container>
@@ -60,7 +57,7 @@
   </mat-list>
 </mat-card-content>
 <mat-card-actions align="end">
-  <button (click)="shareApi()" mat-button color="primary">{{canShare()?'SHARE LINK':'COPY LINK'}}</button>
+  <!--button (click)="shareApi()" mat-button color="primary">{{canShare()?'SHARE LINK':'COPY LINK'}}</button-->
   <button (click)="nextCard()" mat-button color="primary">NEXT CARD</button>
 </mat-card-actions>
 
