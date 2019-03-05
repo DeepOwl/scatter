@@ -1,5 +1,5 @@
 mat-form-field.mat-form-field {
-  font-size: 17px;
+  font-size: 20px;
 }
 .scatter-card{
     max-width: 350px;
@@ -8,6 +8,7 @@ mat-form-field.mat-form-field {
     margin-right: auto;
     margin-top:10px;
 }
+
 
 .middle{
   margin-left:10px;
@@ -27,9 +28,21 @@ mat-form-field.mat-form-field {
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
+
+input{
+  padding:0;
+}
 .example-form-field {
   width: 88%;
+  margin-bottom: -2em;
+  margin-top: -0em;
+  
 }
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+
 
 .right {
   position: absolute;

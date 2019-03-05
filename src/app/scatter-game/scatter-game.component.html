@@ -28,20 +28,14 @@
       </mat-card-subtitle>
       <p class="right" style="color:lightgray">+{{subScore}} pts</p>
     </mat-card-header>
-    <mat-divider style="margin-top:4px; margin-bottom:4px" [inset]='true'></mat-divider>
+    <mat-divider style="margin-top:4px; margin-bottom:6px" [inset]='true'></mat-divider>
     <mat-card-content>
       <ng-container *ngIf="edit">
         <ng-container *ngFor="let category of categories; let i = index;" >
         <div style="width:100%">
-        <mat-form-field style=" margin-bottom: -0.75em" class="example-form-field">
+        <mat-form-field class="example-form-field">
             <input autocomplete="off" #input matInput [(ngModel)]="answers[i]" type="text" placeholder="{{category}}" (keyup.enter)="keytab($event)">
             <span matPrefix>{{i+1}}.&nbsp;</span>
-            <!--button mat-button *ngIf="input.value" matSuffix mat-icon-button aria-label="Clear" (click)="input.value=''">
-              <mat-icon>close</mat-icon>
-            </button-->
-            <!--button mat-button matSuffix mat-icon-button aria-label="add points" (click)="cyclePoints(i)">
-                <mat-icon>{{scoreArray[i]==0?'exposure_zero':scoreArray[i]==1?'exposure_plus_1':'exposure_plus_2'}}</mat-icon>
-            </button-->
           </mat-form-field>
           
           <span class="example-spacer"></span>
