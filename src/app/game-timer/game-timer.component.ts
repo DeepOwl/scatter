@@ -97,9 +97,7 @@ export class GameTimerComponent implements OnInit {
       if(this.timeLeft > 0) {
         this.timeLeft--;
         if(this.notify.includes(this.timeLeft)){
-          if(this.shouldSpeak()){
-            this.speak(''+this.timeLeft);
-          }
+          this.speak(''+this.timeLeft);
           this.timerAlert.next(this.timeLeft);
         }
       } else {
@@ -123,7 +121,8 @@ export class GameTimerComponent implements OnInit {
     return !this.mute &&this.speech.hasBrowserSupport();
   }
 
-  speak(utterance:string){
+  speak(utterance:string):Promise<any>{
+    if(!this.shouldSpeak()) return new Promise<any>((res, error)=>{});
     return this.speech.speak(
     {
       text: utterance,
