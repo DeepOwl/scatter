@@ -14,7 +14,7 @@ export class GameTimerComponent implements OnInit {
   private interval;
   @Input() letter:string;
   private mute: boolean = false;
-  public notify = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+  public notify = [60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
   @Output() timerAlert = new EventEmitter<number>();
   public timerConfig = {leftTime: 3, demand: true}
   speech;
