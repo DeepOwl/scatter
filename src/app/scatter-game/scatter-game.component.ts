@@ -143,7 +143,7 @@ export class ScatterGameComponent implements OnInit {
         const sharedResponse = await this.ngNavigatorShareService.share({
           title: 'Scatter!',
           text: 'Join me in a game of scatter-cards',
-          url: `https://cardy.fun/scatter/${this.id}`
+          url: `https://www.cardy.fun/scatter/${this.id}`
         });
       } catch (error) {
         //console.log('You app is not shared, reason: ', error);
