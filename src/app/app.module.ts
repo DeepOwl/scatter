@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { ScatterComponent } from './scatter/scatter.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ScatterGameComponent } from './scatter-game/scatter-game.component';
+import { ScatterGameComponent, SearchDialog } from './scatter-game/scatter-game.component';
 import { GameTimerComponent } from './game-timer/game-timer.component';
 import { FormsModule } from '@angular/forms';
 
@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     ScatterComponent,
     DashboardComponent,
     ScatterGameComponent,
-    GameTimerComponent
+    GameTimerComponent,
+    SearchDialog
   ],
   imports: [
     BrowserModule,
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule
   ],
+  entryComponents: [SearchDialog],
   providers: [],
   bootstrap: [AppComponent]
 })

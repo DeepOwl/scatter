@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScatterService } from '../scatter.service';
 @Component({
   selector: 'app-scatter',
   templateUrl: './scatter.component.html',
@@ -8,14 +9,16 @@ import { Router } from '@angular/router';
 export class ScatterComponent implements OnInit {
   startingId:string;
   targetId:string = '';
-  constructor(private router:Router) { }
+  constructor(private router:Router, private scatterService:ScatterService) { }
 
   ngOnInit() {
     this.startingId = this.getNextCard();
+    const now: Date = new Date();
+    var rand = this.scatterService.getRNG(""+now.getMonth()+now.getDay()+now.getHours())
+    this.router.navigate([`scatter/${this.scatterService.getNextCard(rand)}`],)
   }
   validId():boolean{
-    var potential = this.targetId.split(' ').join('')
-    return potential.length>2;
+    return this.scatterService.isValidId(this.targetId);
   }
 
   startGameRandom(){
@@ -29,12 +32,8 @@ export class ScatterComponent implements OnInit {
     
   }
 
-  getNextCard(){
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (var i = 0; i < 4; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));  
-    return text;
+  getNextCard():string{
+    return this.scatterService.getNextCard();
   }
 
 }

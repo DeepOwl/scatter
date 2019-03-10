@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Categories } from './categories';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgNavigatorShareService } from 'ng-navigator-share';
-import { MatSnackBar } from '@angular/material'
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+
 import {
   trigger,
   state,
@@ -11,6 +12,7 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { ScatterService } from '../scatter.service';
 
 @Component({
   selector: 'app-scatter-game',
@@ -32,6 +34,7 @@ export class ScatterGameComponent implements OnInit {
   public next: string;
   public id: string;
   public showTimer: boolean = false;
+  //public showSearch: boolean = false;
   public toolbarColor = "primary";
   public edit: boolean = true;
   public startLetter: string;
@@ -44,7 +47,11 @@ export class ScatterGameComponent implements OnInit {
   private savedAnswers = {};
   flip = 'unflipped';
 
-  constructor(private route: ActivatedRoute, private router: Router, private ngNavigatorShareService: NgNavigatorShareService, private snackBar: MatSnackBar) { }
+  constructor(private route: ActivatedRoute, 
+    private router: Router, 
+    private ngNavigatorShareService: NgNavigatorShareService, 
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -55,7 +62,7 @@ export class ScatterGameComponent implements OnInit {
       this.answers.push('');
     }
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = <string>params['id'].toUpperCase();
       this.initializeState(); // reset and set based on new parameter this time
     });
   }
@@ -84,12 +91,12 @@ export class ScatterGameComponent implements OnInit {
     this.subScore = this.scoreArray.reduce((total, num) => total + num)
   }
 
-  nextCard() {
+  nextCard(cardId:string) {
     this.flip = (this.flip === 'unflipped') ? 'flipped' : 'unflipped';
     if (this.flip == 'flipped') {
       setTimeout(() => {
         this.flip = 'unflipped';
-        this.router.navigate([`scatter/${this.next}`]);
+        this.router.navigate([`scatter/${cardId.toUpperCase()}`]);
       }, 200);
     }
     this.score += this.subScore;
@@ -201,10 +208,55 @@ export class ScatterGameComponent implements OnInit {
     }
   }
 
+  showSearch(): void {
+    const dialogRef = this.dialog.open(SearchDialog, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.nextCard(result)
+      }
+    });
+  }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+}
+
+@Component({
+  selector: 'search-dialog',
+  template: `
+  <h1 mat-dialog-title>Find a new card</h1>
+<div mat-dialog-content>
+  <mat-form-field style="width:100%" class="example-form-field">
+    <input  matInput type="text" [(ngModel)]='targetId' placeholder="Card ID" >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">NEVERMIND</button>
+  <button [disabled]='!validId()' mat-raised-button [mat-dialog-close]="targetId" cdkFocusInitial>GO</button>
+</div>
+  `,
+})
+export class SearchDialog {
+  public targetId:string = "";
+  constructor(
+    public dialogRef: MatDialogRef<SearchDialog>, private scatterService:ScatterService
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  validId():boolean {
+    return this.scatterService.isValidId(this.targetId)
   }
 
 }
